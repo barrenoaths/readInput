@@ -7,19 +7,32 @@ import (
 )
 
 func main() {
-	reader := bufio.NewReader(os.Stdin)
+	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Enter something: ")
+	scanner.Scan()
+	input := scanner.Text()
+	fmt.Println("You entered: ", input)
 
-	input, err := reader.ReadString('\n')
+	var num int
+	fmt.Print("Enter a number: ")
+	_, err := fmt.Scan(&num)
 	if err != nil {
-		fmt.Println("An error occurred:", err)
+		fmt.Println("Error reading number: ", err)
+		return
+	}
+	fmt.Println("You entered: ", num)
+	multiplied := 2 * num
+	fmt.Println(multiplied)
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Press a key: ")
+
+	char, _, err := reader.ReadRune()
+	if err != nil {
+		fmt.Println("Error reading input: ", err)
 		return
 	}
 
-	fmt.Printf("You entered: %s", input)
+	fmt.Printf("You pressed: %c\n", char)
 
-	// add reading integers
-	// add reading floats
-	// how to get byte
-	// how to get rune
 }
